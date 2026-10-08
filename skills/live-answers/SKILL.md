@@ -20,13 +20,14 @@ If a tool call fails because the connector needs signing in, give the same steps
 - What's on, events, concerts, comedy, "tonight", "this weekend", an artist's dates: `actuent_events` with `location` (the city in full, e.g. "Copenhagen" for "cph") and `when: "tonight"` for tonight, or `from`/`to` dates.
 - What's open, near me, cafés, restaurants, bars, shops: `actuent_nearby` with the city or "lat,lng" and `open_now: true` when they ask about now.
 - Prices, products, the cheapest, in stock: `actuent_search` (the answer's `products` have prices and other shops).
-- A company's plans, prices, free tier, policies: `actuent_ask_site` with the domain and the question.
+- A company's plans, prices, free tier, policies: `actuent_get_page` with the `domain` and the `question`.
 - "X vs Y": `actuent_compare` with both domains.
-- "Plan my evening", dinner then drinks: `actuent_plan`. A city trip of 1 to 4 days: `actuent_trip`.
+- "Plan my evening", dinner then drinks: `actuent_plan`. A city trip of 1 to 4 days: `actuent_plan` with `kind: "trip"` and `days`.
 - A link the user shares, or one specific page ("what does this page say?", "is this in stock?"): `actuent_get_page` reads it live (prices, sizes with cart links, hours, events, booking links).
 - Everything about one named thing (an artist and their concerts, a brand and its prices, a venue): `actuent_about`.
-- "Tell me when…" (tickets go on sale, back in stock, a page changes): `actuent_watch_page` (Actuent Pro).
+- "Tell me when…" (tickets go on sale, back in stock, a page changes): `actuent_watch` with `kind: "page"` (or `kind: "price"` for a product's price or stock; Actuent Pro).
 - Doing things: events carry `tickets_url`, `add_to_calendar` and `directions`; plans carry a `share_url`; several products from one shop become one checkout link with `actuent_cart`; "ask the restaurant if…" or a booking request goes through `actuent_contact_business` (Actuent Pro; show the user the exact text and send only after they agree).
+- News on a topic: `actuent_search` with `kind: "news"`. Sites like a given one: `kind: "similar"` with the `domain`.
 - Anything else current or real-world: `actuent_search`.
 
 If you know where the user is or their standing preferences (vegetarian, wheelchair access, favourite music), pass `user_location` and `preferences`; they're used for that request only.
